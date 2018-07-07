@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import ContactsUI
 
 enum Status {
     case editing
@@ -19,8 +20,12 @@ class DetailContactViewController: UIViewController {
     @IBOutlet weak var firstNameTextField: UITextField!
     @IBOutlet weak var lastNameTextField: UITextField!
     @IBOutlet weak var phoneTextField: UITextField!
+    
+    @IBOutlet weak var importContactButton: UIButton!
+    
     var buttonItem: UIBarButtonItem!
     var status: Status!
+    var contact: Contact?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -47,18 +52,50 @@ class DetailContactViewController: UIViewController {
             buttonItem = UIBarButtonItem(barButtonSystemItem: .save, target: self, action: #selector(DetailContactViewController.saveContact))
             buttonItem.isEnabled = false
             self.navigationItem.rightBarButtonItem = buttonItem
+            importContactButton.isHidden = false
         case .editing:
-            return
+            buttonItem = UIBarButtonItem(barButtonSystemItem: .save, target: self, action: #selector(DetailContactViewController.saveContact))
+            self.navigationItem.rightBarButtonItem = buttonItem
+            firstNameTextField.isUserInteractionEnabled = true
+            lastNameTextField.isUserInteractionEnabled = true
+            phoneTextField.isUserInteractionEnabled = true
+            firstNameTextField.becomeFirstResponder()
         case .displaying:
-            return
+            buttonItem = UIBarButtonItem(barButtonSystemItem: .edit, target: self, action: #selector(DetailContactViewController.editContact))
+            self.navigationItem.rightBarButtonItem = buttonItem
+            firstNameTextField.text = contact?.firstName
+            lastNameTextField.text = contact?.lastName
+            phoneTextField.text = contact?.phoneNumber
+            firstNameTextField.isUserInteractionEnabled = false
+            lastNameTextField.isUserInteractionEnabled = false
+            phoneTextField.isUserInteractionEnabled = false
         default:
             return
         }
     }
     
     @objc func saveContact() {
-        CoreDataManager.sharedManager.saveContact(firstName: firstNameTextField.text!, lastName: lastNameTextField.text!, phoneNumber: phoneTextField.text!)
+        switch status {
+        case .insertingNew:
+            CoreDataManager.sharedManager.saveContact(firstName: firstNameTextField.text!, lastName: lastNameTextField.text!, phoneNumber: phoneTextField.text!)
+        case .editing:
+            guard let contact = contact else {break}
+            contact.updateData(firstName: firstNameTextField.text!, lastName: lastNameTextField.text!, phoneNumber: phoneTextField.text!)
+        default:
+            break
+        }
         navigationController?.popViewController(animated: true)
+    }
+    
+    @objc func editContact() {
+        status = .editing
+        configureView()
+    }
+    
+    @IBAction func importContact(_ sender: Any) {
+        let contactController = CNContactPickerViewController()
+        contactController.delegate = self
+        self.present(contactController, animated: true, completion: nil)
     }
     
     @objc func textFieldEdited(_ textField: UITextField) {
@@ -90,10 +127,22 @@ extension DetailContactViewController:UITextFieldDelegate {
     }
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        guard textField === phoneTextField else {return true}
         return true
     }
     
 }
 
-//MARK: - Toggle UIBarButtonItem Extension
+//MARK: - ContactPickerDelegate Methods
+
+extension DetailContactViewController:CNContactPickerDelegate {
+    func contactPicker(_ picker: CNContactPickerViewController, didSelect contact: CNContact) {
+        let firstName = contact.givenName
+        let lastName = contact.familyName
+        let phone = contact.phoneNumbers.first?.value.stringValue
+        self.firstNameTextField.text = firstName
+        self.lastNameTextField.text = lastName
+        self.phoneTextField.text = phone
+    }
+}
 

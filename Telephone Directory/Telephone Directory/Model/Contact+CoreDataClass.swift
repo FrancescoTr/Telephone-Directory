@@ -20,6 +20,13 @@ public class Contact: NSManagedObject {
         self.phoneNumber = phoneNumber
     }
     
+    func updateData(firstName: String, lastName:String, phoneNumber:String) {
+        self.firstName = firstName
+        self.lastName = lastName
+        self.phoneNumber = phoneNumber
+        CoreDataManager.sharedManager.saveContext()
+    }
+    
     static func isValidPhoneNumber(string: String) -> Bool {
         let pattern = "^[+][0-9]+[\\s][0-9]+[\\s][0-9]{6,}$"
         var status = false

@@ -35,6 +35,9 @@ class ContactsListViewController: UIViewController {
         switch segue.identifier {
         case "newContactSegue":
             vc.status = .insertingNew
+        case "displayContactSegue":
+            vc.status = .displaying
+            vc.contact = filteredContacts[(contactsTableView.indexPathForSelectedRow?.row)!]
         default:
             return
         }
@@ -83,7 +86,6 @@ extension ContactsListViewController: UISearchBarDelegate {
     }
     
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
-        print("cancel button clicked")
         searchBar.showsCancelButton = false
         searchBar.text = ""
         searchBar.resignFirstResponder()
