@@ -22,13 +22,40 @@
                                 <rect key="frame" x="16" y="64" width="343" height="583"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="contactCellID" id="wTg-pv-rdz">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="contactCellID" id="wTg-pv-rdz" customClass="ContactsTableViewCell" customModule="Telephone_Directory" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="343" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="wTg-pv-rdz" id="rb8-ZT-CgS">
                                             <rect key="frame" x="0.0" y="0.0" width="343" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5dQ-Zy-uPg">
+                                                    <rect key="frame" x="15" y="0.0" width="313" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Phone Number" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ADd-Op-dQ9">
+                                                    <rect key="frame" x="15" y="21" width="103" height="18"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="ADd-Op-dQ9" firstAttribute="top" secondItem="5dQ-Zy-uPg" secondAttribute="bottom" id="1Xt-qY-IRB"/>
+                                                <constraint firstItem="5dQ-Zy-uPg" firstAttribute="leading" secondItem="rb8-ZT-CgS" secondAttribute="leading" constant="15" id="B5y-DI-cHo"/>
+                                                <constraint firstItem="ADd-Op-dQ9" firstAttribute="top" secondItem="5dQ-Zy-uPg" secondAttribute="bottom" id="DQp-of-tRf"/>
+                                                <constraint firstAttribute="trailing" secondItem="5dQ-Zy-uPg" secondAttribute="trailing" constant="15" id="F6a-hP-SPe"/>
+                                                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="ADd-Op-dQ9" secondAttribute="trailing" constant="20" symbolic="YES" id="Q1C-Ck-AbD"/>
+                                                <constraint firstItem="5dQ-Zy-uPg" firstAttribute="top" secondItem="rb8-ZT-CgS" secondAttribute="top" id="bqP-7K-Fge"/>
+                                                <constraint firstItem="ADd-Op-dQ9" firstAttribute="leading" secondItem="rb8-ZT-CgS" secondAttribute="leading" constant="15" id="gKk-Td-DVg"/>
+                                            </constraints>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="nameLabel" destination="5dQ-Zy-uPg" id="Y1C-y1-kbl"/>
+                                            <outlet property="phoneLabel" destination="ADd-Op-dQ9" id="M9o-nP-yX7"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
@@ -43,6 +70,7 @@
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <navigationItem key="navigationItem" id="mec-qz-w3R"/>
+                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <connections>
                         <outlet property="contactsTableView" destination="MKV-nJ-HHz" id="y4Q-tp-KZR"/>
                     </connections>
