@@ -10,7 +10,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Contacts List View Controller-->
+        <!--Telephone Directory-->
         <scene sceneID="tne-QT-ifu">
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="ContactsListViewController" customModule="Telephone_Directory" customModuleProvider="target" sceneMemberID="viewController">
@@ -18,37 +18,41 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="MKV-nJ-HHz">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="45" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="MKV-nJ-HHz">
                                 <rect key="frame" x="16" y="70" width="343" height="577"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <searchBar key="tableHeaderView" contentMode="redraw" id="Uj4-eB-Qgc">
+                                    <rect key="frame" x="0.0" y="0.0" width="343" height="44"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                    <textInputTraits key="textInputTraits"/>
+                                </searchBar>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="contactCellID" id="wTg-pv-rdz" customClass="ContactsTableViewCell" customModule="Telephone_Directory" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="343" height="44"/>
+                                        <rect key="frame" x="0.0" y="72" width="343" height="45"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="wTg-pv-rdz" id="rb8-ZT-CgS">
-                                            <rect key="frame" x="0.0" y="0.0" width="343" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="343" height="44.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5dQ-Zy-uPg">
-                                                    <rect key="frame" x="15" y="0.0" width="313" height="21"/>
+                                                    <rect key="frame" x="15" y="3" width="313" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Phone Number" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ADd-Op-dQ9">
-                                                    <rect key="frame" x="15" y="21" width="103" height="18"/>
+                                                    <rect key="frame" x="15" y="25" width="103" height="18"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="ADd-Op-dQ9" firstAttribute="top" secondItem="5dQ-Zy-uPg" secondAttribute="bottom" id="1Xt-qY-IRB"/>
                                                 <constraint firstItem="5dQ-Zy-uPg" firstAttribute="leading" secondItem="rb8-ZT-CgS" secondAttribute="leading" constant="15" id="B5y-DI-cHo"/>
-                                                <constraint firstItem="ADd-Op-dQ9" firstAttribute="top" secondItem="5dQ-Zy-uPg" secondAttribute="bottom" id="DQp-of-tRf"/>
+                                                <constraint firstItem="ADd-Op-dQ9" firstAttribute="top" secondItem="5dQ-Zy-uPg" secondAttribute="bottom" constant="1" id="DQp-of-tRf"/>
                                                 <constraint firstAttribute="trailing" secondItem="5dQ-Zy-uPg" secondAttribute="trailing" constant="15" id="F6a-hP-SPe"/>
                                                 <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="ADd-Op-dQ9" secondAttribute="trailing" constant="20" symbolic="YES" id="Q1C-Ck-AbD"/>
-                                                <constraint firstItem="5dQ-Zy-uPg" firstAttribute="top" secondItem="rb8-ZT-CgS" secondAttribute="top" id="bqP-7K-Fge"/>
+                                                <constraint firstItem="5dQ-Zy-uPg" firstAttribute="top" secondItem="rb8-ZT-CgS" secondAttribute="top" constant="3" id="bqP-7K-Fge"/>
                                                 <constraint firstItem="ADd-Op-dQ9" firstAttribute="leading" secondItem="rb8-ZT-CgS" secondAttribute="leading" constant="15" id="gKk-Td-DVg"/>
                                             </constraints>
                                         </tableViewCellContentView>
@@ -62,14 +66,18 @@
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
+                            <constraint firstItem="MKV-nJ-HHz" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="6" id="VAJ-q6-b2H"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="MKV-nJ-HHz" secondAttribute="trailing" constant="16" id="Vig-cL-gVz"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="MKV-nJ-HHz" secondAttribute="trailing" constant="16" id="d3V-Hf-IVV"/>
                             <constraint firstItem="MKV-nJ-HHz" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="lWL-Mz-OCF"/>
                             <constraint firstAttribute="bottom" secondItem="MKV-nJ-HHz" secondAttribute="bottom" constant="20" symbolic="YES" id="mtC-Q9-FgB"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="MKV-nJ-HHz" secondAttribute="bottom" constant="20" id="nWg-T0-5pj"/>
+                            <constraint firstItem="MKV-nJ-HHz" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="wUe-sH-EAv"/>
                             <constraint firstItem="MKV-nJ-HHz" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="6" id="zuW-8B-mtW"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
-                    <navigationItem key="navigationItem" id="mec-qz-w3R">
+                    <navigationItem key="navigationItem" title="Telephone Directory" id="mec-qz-w3R">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="NCO-9K-fny">
                             <connections>
                                 <segue destination="JFC-T2-fub" kind="show" identifier="newContactSegue" id="S7P-IG-xMP"/>
@@ -79,6 +87,7 @@
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <connections>
                         <outlet property="contactsTableView" destination="MKV-nJ-HHz" id="y4Q-tp-KZR"/>
+                        <outlet property="searchBar" destination="Uj4-eB-Qgc" id="19A-Jw-Dgv"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -109,14 +118,21 @@
                                 <rect key="frame" x="16" y="211" width="343" height="30"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" textContentType="tel"/>
+                                <textInputTraits key="textInputTraits" keyboardType="numbersAndPunctuation" textContentType="tel"/>
                             </textField>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3el-kH-l8t">
+                                <rect key="frame" x="16" y="318" width="343" height="30"/>
+                                <state key="normal" title="Import from contacts"/>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
+                            <constraint firstItem="0ge-hg-JOg" firstAttribute="trailing" secondItem="3el-kH-l8t" secondAttribute="trailing" constant="16" id="4ts-bi-qYu"/>
                             <constraint firstItem="0ge-hg-JOg" firstAttribute="trailing" secondItem="Yls-Ts-xuT" secondAttribute="trailing" constant="16" id="CBz-JG-GE5"/>
+                            <constraint firstItem="3el-kH-l8t" firstAttribute="top" secondItem="9ub-kM-Uru" secondAttribute="bottom" constant="77" id="HSB-by-Fbj"/>
                             <constraint firstItem="9ub-kM-Uru" firstAttribute="top" secondItem="Yls-Ts-xuT" secondAttribute="bottom" constant="29" id="LMw-BA-HLp"/>
                             <constraint firstItem="9ub-kM-Uru" firstAttribute="leading" secondItem="0ge-hg-JOg" secondAttribute="leading" constant="16" id="THn-Uq-ufG"/>
+                            <constraint firstItem="3el-kH-l8t" firstAttribute="leading" secondItem="0ge-hg-JOg" secondAttribute="leading" constant="16" id="bSA-b3-G3Z"/>
                             <constraint firstItem="BhV-Hr-390" firstAttribute="top" secondItem="0ge-hg-JOg" secondAttribute="top" constant="29" id="dfw-Bm-Gyc"/>
                             <constraint firstItem="Yls-Ts-xuT" firstAttribute="leading" secondItem="0ge-hg-JOg" secondAttribute="leading" constant="16" id="fsT-4h-vjP"/>
                             <constraint firstItem="0ge-hg-JOg" firstAttribute="trailing" secondItem="9ub-kM-Uru" secondAttribute="trailing" constant="16" id="h6i-Ja-jF9"/>

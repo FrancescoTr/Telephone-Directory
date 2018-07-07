@@ -19,4 +19,19 @@ public class Contact: NSManagedObject {
         self.lastName = lastName
         self.phoneNumber = phoneNumber
     }
+    
+    static func isValidPhoneNumber(string: String) -> Bool {
+        let pattern = "^[+][0-9]+[\\s][0-9]+[\\s][0-9]{6,}$"
+        var status = false
+        do {
+            let regex = try NSRegularExpression(pattern: pattern, options: .caseInsensitive)
+            let results = regex.numberOfMatches(in: string, options: .anchored, range: NSMakeRange(0, string.count))
+            if results > 0 {
+                status = true
+            }
+        } catch let error {
+            print(error)
+        }
+        return status
+    }
 }

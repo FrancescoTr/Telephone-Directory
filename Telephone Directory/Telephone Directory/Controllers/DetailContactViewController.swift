@@ -24,20 +24,28 @@ class DetailContactViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        firstNameTextField.delegate = self
-        lastNameTextField.delegate = self
-        phoneTextField.delegate = self
+        configureTextFields()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        configureViews()
+        configureView()
     }
     
-    func configureViews() {
+    func configureTextFields() {
+        firstNameTextField.delegate = self
+        firstNameTextField.addTarget(self, action: #selector(textFieldEdited), for: .editingChanged)
+        lastNameTextField.delegate = self
+        lastNameTextField.addTarget(self, action: #selector(textFieldEdited), for: .editingChanged)
+        phoneTextField.delegate = self
+        phoneTextField.addTarget(self, action: #selector(textFieldEdited), for: .editingChanged)
+    }
+    
+    func configureView() {
         switch status {
         case .insertingNew:
             buttonItem = UIBarButtonItem(barButtonSystemItem: .save, target: self, action: #selector(DetailContactViewController.saveContact))
+            buttonItem.isEnabled = false
             self.navigationItem.rightBarButtonItem = buttonItem
         case .editing:
             return
@@ -52,10 +60,40 @@ class DetailContactViewController: UIViewController {
         CoreDataManager.sharedManager.saveContact(firstName: firstNameTextField.text!, lastName: lastNameTextField.text!, phoneNumber: phoneTextField.text!)
         navigationController?.popViewController(animated: true)
     }
+    
+    @objc func textFieldEdited(_ textField: UITextField) {
+        if textField.text?.count == 1 {
+            if textField.text?.first == " " {
+                textField.text = ""
+                return
+            }
+        }
+        guard
+        let firstName = firstNameTextField.text, !firstName.isEmpty,
+        let lastName = lastNameTextField.text, !lastName.isEmpty,
+        let phone = phoneTextField.text, Contact.isValidPhoneNumber(string: phone)
+        else {
+            buttonItem.isEnabled = false
+            return
+        }
+        buttonItem.isEnabled = true
+    }
 }
 
 //MARK: - TextFieldDelegate Methods
 
 extension DetailContactViewController:UITextFieldDelegate {
     
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
+    
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        return true
+    }
+    
 }
+
+//MARK: - Toggle UIBarButtonItem Extension
+
