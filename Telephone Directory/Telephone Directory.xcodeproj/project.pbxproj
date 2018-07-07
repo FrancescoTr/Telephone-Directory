@@ -18,6 +18,7 @@
 		685EBF5A20F0BED600653463 /* Contact+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 685EBF5820F0BED600653463 /* Contact+CoreDataProperties.swift */; };
 		687BA66D20F0C4C60060D156 /* ContactsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 687BA66C20F0C4C60060D156 /* ContactsTableViewCell.swift */; };
 		687BA66F20F0C84E0060D156 /* ErrorAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 687BA66E20F0C84E0060D156 /* ErrorAlert.swift */; };
+		687BA67120F103720060D156 /* DetailContactViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 687BA67020F103720060D156 /* DetailContactViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,6 +35,7 @@
 		685EBF5820F0BED600653463 /* Contact+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Contact+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		687BA66C20F0C4C60060D156 /* ContactsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactsTableViewCell.swift; sourceTree = "<group>"; };
 		687BA66E20F0C84E0060D156 /* ErrorAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorAlert.swift; sourceTree = "<group>"; };
+		687BA67020F103720060D156 /* DetailContactViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailContactViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -87,6 +89,7 @@
 			isa = PBXGroup;
 			children = (
 				685EBF3920F0B12000653463 /* ContactsListViewController.swift */,
+				687BA67020F103720060D156 /* DetailContactViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -195,6 +198,7 @@
 			files = (
 				687BA66D20F0C4C60060D156 /* ContactsTableViewCell.swift in Sources */,
 				685EBF5A20F0BED600653463 /* Contact+CoreDataProperties.swift in Sources */,
+				687BA67120F103720060D156 /* DetailContactViewController.swift in Sources */,
 				685EBF5220F0B9ED00653463 /* Contacts.xcdatamodeld in Sources */,
 				685EBF4F20F0B25700653463 /* CoreDataManager.swift in Sources */,
 				685EBF3A20F0B12000653463 /* ContactsListViewController.swift in Sources */,

@@ -24,6 +24,16 @@ class ContactsListViewController: UIViewController {
         refreshData()
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let vc = segue.destination as! DetailContactViewController
+        switch segue.identifier {
+        case "newContactSegue":
+            vc.status = .insertingNew
+        default:
+            return
+        }
+    }
+    
     func refreshData() {
         do {
             try contacts = CoreDataManager.sharedManager.loadContacts()

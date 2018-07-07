@@ -47,4 +47,9 @@ class CoreDataManager {
             throw error
         }
     }
+    
+    func saveContact(firstName:String, lastName:String, phoneNumber:String) {
+        _ = Contact(firstName: firstName, lastName: lastName, phoneNumber: phoneNumber, context: self.managedContext)
+        saveContext()
+    }
 }

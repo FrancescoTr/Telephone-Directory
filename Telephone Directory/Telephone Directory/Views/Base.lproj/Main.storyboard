@@ -19,7 +19,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="MKV-nJ-HHz">
-                                <rect key="frame" x="16" y="64" width="343" height="583"/>
+                                <rect key="frame" x="16" y="70" width="343" height="577"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="contactCellID" id="wTg-pv-rdz" customClass="ContactsTableViewCell" customModule="Telephone_Directory" customModuleProvider="target">
@@ -62,14 +62,20 @@
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="MKV-nJ-HHz" secondAttribute="bottom" constant="20" id="N2w-Mj-YYE"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="MKV-nJ-HHz" secondAttribute="trailing" constant="16" id="Vig-cL-gVz"/>
                             <constraint firstItem="MKV-nJ-HHz" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="lWL-Mz-OCF"/>
-                            <constraint firstItem="MKV-nJ-HHz" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="zuW-8B-mtW"/>
+                            <constraint firstAttribute="bottom" secondItem="MKV-nJ-HHz" secondAttribute="bottom" constant="20" symbolic="YES" id="mtC-Q9-FgB"/>
+                            <constraint firstItem="MKV-nJ-HHz" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="6" id="zuW-8B-mtW"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
-                    <navigationItem key="navigationItem" id="mec-qz-w3R"/>
+                    <navigationItem key="navigationItem" id="mec-qz-w3R">
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="NCO-9K-fny">
+                            <connections>
+                                <segue destination="JFC-T2-fub" kind="show" identifier="newContactSegue" id="S7P-IG-xMP"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <connections>
                         <outlet property="contactsTableView" destination="MKV-nJ-HHz" id="y4Q-tp-KZR"/>
@@ -78,6 +84,57 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1076" y="132.68365817091455"/>
+        </scene>
+        <!--Detail Contact View Controller-->
+        <scene sceneID="M4J-L8-Wj6">
+            <objects>
+                <viewController id="JFC-T2-fub" customClass="DetailContactViewController" customModule="Telephone_Directory" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="h8A-9q-9pv">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="First Name" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="BhV-Hr-390">
+                                <rect key="frame" x="16" y="93" width="343" height="30"/>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" textContentType="given-name"/>
+                            </textField>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Last Name" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Yls-Ts-xuT">
+                                <rect key="frame" x="16" y="152" width="343" height="30"/>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" textContentType="family-name"/>
+                            </textField>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Phone Number" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="9ub-kM-Uru">
+                                <rect key="frame" x="16" y="211" width="343" height="30"/>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" textContentType="tel"/>
+                            </textField>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="0ge-hg-JOg" firstAttribute="trailing" secondItem="Yls-Ts-xuT" secondAttribute="trailing" constant="16" id="CBz-JG-GE5"/>
+                            <constraint firstItem="9ub-kM-Uru" firstAttribute="top" secondItem="Yls-Ts-xuT" secondAttribute="bottom" constant="29" id="LMw-BA-HLp"/>
+                            <constraint firstItem="9ub-kM-Uru" firstAttribute="leading" secondItem="0ge-hg-JOg" secondAttribute="leading" constant="16" id="THn-Uq-ufG"/>
+                            <constraint firstItem="BhV-Hr-390" firstAttribute="top" secondItem="0ge-hg-JOg" secondAttribute="top" constant="29" id="dfw-Bm-Gyc"/>
+                            <constraint firstItem="Yls-Ts-xuT" firstAttribute="leading" secondItem="0ge-hg-JOg" secondAttribute="leading" constant="16" id="fsT-4h-vjP"/>
+                            <constraint firstItem="0ge-hg-JOg" firstAttribute="trailing" secondItem="9ub-kM-Uru" secondAttribute="trailing" constant="16" id="h6i-Ja-jF9"/>
+                            <constraint firstItem="Yls-Ts-xuT" firstAttribute="top" secondItem="BhV-Hr-390" secondAttribute="bottom" constant="29" id="owA-ZD-XDf"/>
+                            <constraint firstItem="BhV-Hr-390" firstAttribute="leading" secondItem="0ge-hg-JOg" secondAttribute="leading" constant="16" id="rd0-9q-37i"/>
+                            <constraint firstItem="0ge-hg-JOg" firstAttribute="trailing" secondItem="BhV-Hr-390" secondAttribute="trailing" constant="16" id="xWk-w2-Ckk"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="0ge-hg-JOg"/>
+                    </view>
+                    <connections>
+                        <outlet property="firstNameTextField" destination="BhV-Hr-390" id="2Xk-nV-tQQ"/>
+                        <outlet property="lastNameTextField" destination="Yls-Ts-xuT" id="Iby-z5-F5V"/>
+                        <outlet property="phoneTextField" destination="9ub-kM-Uru" id="a0l-51-oe7"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="CYf-vl-FHj" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1938.4000000000001" y="132.68365817091455"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="OH2-wj-u7h">

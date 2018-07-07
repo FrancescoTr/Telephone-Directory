@@ -12,5 +12,11 @@ import CoreData
 
 
 public class Contact: NSManagedObject {
-
+    convenience init(firstName: String, lastName:String, phoneNumber:String, context: NSManagedObjectContext) {
+        let entity = Contact.entity()
+        self.init(entity: entity, insertInto: context)
+        self.firstName = firstName
+        self.lastName = lastName
+        self.phoneNumber = phoneNumber
+    }
 }
