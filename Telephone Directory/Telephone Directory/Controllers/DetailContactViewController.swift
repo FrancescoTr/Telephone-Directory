@@ -127,8 +127,26 @@ extension DetailContactViewController:UITextFieldDelegate {
     }
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-        guard textField === phoneTextField else {return true}
-        return true
+        guard textField == phoneTextField, !string.isEmpty else {
+                return true
+        }
+        guard let lastChar = textField.text?.last else {
+            return string.range(of: "+") != nil
+        }
+        var allowedCharacters = CharacterSet.decimalDigits
+        switch lastChar {
+        case "+":
+            return string.rangeOfCharacter(from: allowedCharacters) != nil
+        case " ":
+            return string.rangeOfCharacter(from: allowedCharacters) != nil
+        default:
+            if (textField.text?.components(separatedBy: " ").count)! < 3 {
+                allowedCharacters.insert(charactersIn: " ")
+                return string.rangeOfCharacter(from: allowedCharacters) != nil
+            } else {
+                return string.rangeOfCharacter(from: allowedCharacters) != nil
+            }
+        }
     }
     
 }
