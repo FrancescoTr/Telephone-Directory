@@ -53,6 +53,7 @@ class DetailContactViewController: UIViewController {
             buttonItem.isEnabled = false
             self.navigationItem.rightBarButtonItem = buttonItem
             importContactButton.isHidden = false
+            textFieldEdited(phoneTextField)
         case .editing:
             buttonItem = UIBarButtonItem(barButtonSystemItem: .save, target: self, action: #selector(DetailContactViewController.saveContact))
             self.navigationItem.rightBarButtonItem = buttonItem
@@ -127,12 +128,18 @@ extension DetailContactViewController:UITextFieldDelegate {
     }
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-        guard textField == phoneTextField, !string.isEmpty else {
+        guard textField == phoneTextField else {
                 return true
         }
+        textField.layer.borderColor = UIColor.red.cgColor
+        textField.layer.borderWidth = 1
         guard let lastChar = textField.text?.last else {
             return string.range(of: "+") != nil
         }
+        if Contact.isValidPhoneNumber(string: !string.isEmpty ? (textField.text! + string) : String((textField.text?.dropLast())!)) {
+            textField.layer.borderColor = UIColor.green.cgColor
+        }
+        guard !string.isEmpty else {return true}
         var allowedCharacters = CharacterSet.decimalDigits
         switch lastChar {
         case "+":
@@ -157,10 +164,18 @@ extension DetailContactViewController:CNContactPickerDelegate {
     func contactPicker(_ picker: CNContactPickerViewController, didSelect contact: CNContact) {
         let firstName = contact.givenName
         let lastName = contact.familyName
-        let phone = contact.phoneNumbers.first?.value.stringValue
+        let phone = contact.phoneNumbers.first?.value.stringValue ?? ""
         self.firstNameTextField.text = firstName
         self.lastNameTextField.text = lastName
-        self.phoneTextField.text = phone
+        var allowedCharacters = CharacterSet.decimalDigits
+        allowedCharacters.insert(charactersIn: " +")
+        let filteredPhone = String(phone.unicodeScalars.filter { allowedCharacters.contains($0)})
+        if filteredPhone.contains("+") {
+            self.phoneTextField.text = filteredPhone
+        } else {
+            self.phoneTextField.text = "+39 " + filteredPhone
+        }
+        _  = textField(phoneTextField, shouldChangeCharactersIn: NSRange.init(), replacementString: "")
     }
 }
 

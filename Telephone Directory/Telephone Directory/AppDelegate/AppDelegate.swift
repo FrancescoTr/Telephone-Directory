@@ -50,7 +50,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
         CoreDataManager.sharedManager.saveContext()
     }
+}
 
-
+extension UIApplication {
+    static func topViewController() -> UIViewController? {
+        guard var top = shared.keyWindow?.rootViewController else {
+            return nil
+        }
+        while let next = top.presentedViewController {
+            top = next
+        }
+        return top
+    }
 }
 

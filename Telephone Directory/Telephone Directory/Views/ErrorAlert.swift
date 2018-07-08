@@ -9,10 +9,15 @@
 import UIKit
 
 extension NSError {
-    func alert(controller: UIViewController) {
+    func alert(controller: UIViewController?) {
         let alertController = UIAlertController(title: "Error", message: self.description, preferredStyle: .alert)
         let action = UIAlertAction(title: "OK", style: .cancel, handler: nil)
         alertController.addAction(action)
-        controller.present(alertController, animated: true, completion: nil)
+        let presentingController = controller ?? UIApplication.topViewController()
+        guard presentingController != nil else {
+            print("Error: \(self.description)")
+            return
+        }
+        presentingController?.present(alertController, animated: true, completion: nil)
     }
 }

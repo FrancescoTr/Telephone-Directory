@@ -20,7 +20,7 @@ class CoreDataManager {
         let container = NSPersistentContainer(name: containerName)
         container.loadPersistentStores(completionHandler: { (storeDescription, error) in
             if let error = error as NSError? {
-                print("Error \(error) - \(error.userInfo)")
+                error.alert(controller: nil)
             }
         })
         return container
@@ -35,8 +35,7 @@ class CoreDataManager {
         do {
             try managedContext.save()
         } catch let error as NSError {
-            //TODO: Manage Save Error
-            print("Error saving data: \(error) - \(error.userInfo)")
+            error.alert(controller: nil)
         }
     }
     
