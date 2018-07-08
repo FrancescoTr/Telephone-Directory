@@ -110,19 +110,19 @@
                                 <textInputTraits key="textInputTraits" textContentType="given-name"/>
                             </textField>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" placeholder="Last Name" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Yls-Ts-xuT">
-                                <rect key="frame" x="16" y="117" width="343" height="21"/>
+                                <rect key="frame" x="16" y="113" width="343" height="21"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" textContentType="family-name"/>
                             </textField>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" placeholder="Phone Number" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="9ub-kM-Uru">
-                                <rect key="frame" x="16" y="154" width="343" height="21"/>
+                                <rect key="frame" x="16" y="146" width="343" height="21"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="numbersAndPunctuation" smartDashesType="no" smartInsertDeleteType="no" smartQuotesType="no" textContentType="tel"/>
                             </textField>
                             <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3el-kH-l8t">
-                                <rect key="frame" x="16" y="225" width="343" height="30"/>
+                                <rect key="frame" x="16" y="213" width="343" height="30"/>
                                 <state key="normal" title="Import from contacts"/>
                                 <connections>
                                     <action selector="importContact:" destination="JFC-T2-fub" eventType="touchUpInside" id="292-As-FbY"/>
@@ -133,14 +133,14 @@
                         <constraints>
                             <constraint firstItem="0ge-hg-JOg" firstAttribute="trailing" secondItem="3el-kH-l8t" secondAttribute="trailing" constant="16" id="4ts-bi-qYu"/>
                             <constraint firstItem="0ge-hg-JOg" firstAttribute="trailing" secondItem="Yls-Ts-xuT" secondAttribute="trailing" constant="16" id="CBz-JG-GE5"/>
-                            <constraint firstItem="3el-kH-l8t" firstAttribute="top" secondItem="9ub-kM-Uru" secondAttribute="bottom" constant="50" id="HSB-by-Fbj"/>
-                            <constraint firstItem="9ub-kM-Uru" firstAttribute="top" secondItem="Yls-Ts-xuT" secondAttribute="bottom" constant="16" id="LMw-BA-HLp"/>
+                            <constraint firstItem="3el-kH-l8t" firstAttribute="top" secondItem="9ub-kM-Uru" secondAttribute="bottom" constant="46" id="HSB-by-Fbj"/>
+                            <constraint firstItem="9ub-kM-Uru" firstAttribute="top" secondItem="Yls-Ts-xuT" secondAttribute="bottom" constant="12" id="LMw-BA-HLp"/>
                             <constraint firstItem="9ub-kM-Uru" firstAttribute="leading" secondItem="0ge-hg-JOg" secondAttribute="leading" constant="16" id="THn-Uq-ufG"/>
                             <constraint firstItem="3el-kH-l8t" firstAttribute="leading" secondItem="0ge-hg-JOg" secondAttribute="leading" constant="16" id="bSA-b3-G3Z"/>
                             <constraint firstItem="BhV-Hr-390" firstAttribute="top" secondItem="0ge-hg-JOg" secondAttribute="top" constant="16" id="dfw-Bm-Gyc"/>
                             <constraint firstItem="Yls-Ts-xuT" firstAttribute="leading" secondItem="0ge-hg-JOg" secondAttribute="leading" constant="16" id="fsT-4h-vjP"/>
                             <constraint firstItem="0ge-hg-JOg" firstAttribute="trailing" secondItem="9ub-kM-Uru" secondAttribute="trailing" constant="16" id="h6i-Ja-jF9"/>
-                            <constraint firstItem="Yls-Ts-xuT" firstAttribute="top" secondItem="BhV-Hr-390" secondAttribute="bottom" constant="16" id="owA-ZD-XDf"/>
+                            <constraint firstItem="Yls-Ts-xuT" firstAttribute="top" secondItem="BhV-Hr-390" secondAttribute="bottom" constant="12" id="owA-ZD-XDf"/>
                             <constraint firstItem="BhV-Hr-390" firstAttribute="leading" secondItem="0ge-hg-JOg" secondAttribute="leading" constant="16" id="rd0-9q-37i"/>
                             <constraint firstItem="0ge-hg-JOg" firstAttribute="trailing" secondItem="BhV-Hr-390" secondAttribute="trailing" constant="16" id="xWk-w2-Ckk"/>
                         </constraints>
@@ -151,6 +151,9 @@
                         <outlet property="importContactButton" destination="3el-kH-l8t" id="FKa-Qe-drk"/>
                         <outlet property="lastNameTextField" destination="Yls-Ts-xuT" id="Iby-z5-F5V"/>
                         <outlet property="phoneTextField" destination="9ub-kM-Uru" id="a0l-51-oe7"/>
+                        <outletCollection property="textFields" destination="BhV-Hr-390" collectionClass="NSMutableArray" id="EqN-vb-jYt"/>
+                        <outletCollection property="textFields" destination="Yls-Ts-xuT" collectionClass="NSMutableArray" id="lOr-oU-mGx"/>
+                        <outletCollection property="textFields" destination="9ub-kM-Uru" collectionClass="NSMutableArray" id="noY-5B-kTm"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CYf-vl-FHj" userLabel="First Responder" sceneMemberID="firstResponder"/>

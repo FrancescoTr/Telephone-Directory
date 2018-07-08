@@ -21,6 +21,8 @@ class DetailContactViewController: UIViewController {
     @IBOutlet weak var lastNameTextField: UITextField!
     @IBOutlet weak var phoneTextField: UITextField!
     
+    @IBOutlet var textFields: [UITextField]!
+    
     @IBOutlet weak var importContactButton: UIButton!
     
     var buttonItem: UIBarButtonItem!
@@ -38,12 +40,10 @@ class DetailContactViewController: UIViewController {
     }
     
     func configureTextFields() {
-        firstNameTextField.delegate = self
-        firstNameTextField.addTarget(self, action: #selector(textFieldEdited), for: .editingChanged)
-        lastNameTextField.delegate = self
-        lastNameTextField.addTarget(self, action: #selector(textFieldEdited), for: .editingChanged)
-        phoneTextField.delegate = self
-        phoneTextField.addTarget(self, action: #selector(textFieldEdited), for: .editingChanged)
+        for textField in textFields {
+            textField.delegate = self
+            textField.addTarget(self, action: #selector(textFieldEdited), for: .editingChanged)
+        }
     }
     
     func configureView() {
@@ -53,13 +53,15 @@ class DetailContactViewController: UIViewController {
             buttonItem.isEnabled = false
             self.navigationItem.rightBarButtonItem = buttonItem
             importContactButton.isHidden = false
-            textFieldEdited(phoneTextField)
+            for textField in textFields {
+                textFieldEdited(textField)
+            }
         case .editing:
             buttonItem = UIBarButtonItem(barButtonSystemItem: .save, target: self, action: #selector(DetailContactViewController.saveContact))
             self.navigationItem.rightBarButtonItem = buttonItem
-            firstNameTextField.isUserInteractionEnabled = true
-            lastNameTextField.isUserInteractionEnabled = true
-            phoneTextField.isUserInteractionEnabled = true
+            for textField in textFields {
+                textField.isUserInteractionEnabled = true
+            }
             firstNameTextField.becomeFirstResponder()
         case .displaying:
             buttonItem = UIBarButtonItem(barButtonSystemItem: .edit, target: self, action: #selector(DetailContactViewController.editContact))
@@ -67,9 +69,9 @@ class DetailContactViewController: UIViewController {
             firstNameTextField.text = contact?.firstName
             lastNameTextField.text = contact?.lastName
             phoneTextField.text = contact?.phoneNumber
-            firstNameTextField.isUserInteractionEnabled = false
-            lastNameTextField.isUserInteractionEnabled = false
-            phoneTextField.isUserInteractionEnabled = false
+            for textField in textFields {
+                textField.isUserInteractionEnabled = false
+            }
         default:
             return
         }
@@ -106,6 +108,22 @@ class DetailContactViewController: UIViewController {
                 return
             }
         }
+        textField.layer.borderWidth = 1
+        if textField != phoneTextField {
+            switch textField.text!.isEmpty {
+            case false:
+                textField.layer.borderColor = UIColor.green.cgColor
+            default:
+                textField.layer.borderColor = UIColor.red.cgColor
+            }
+        } else {
+            switch Contact.isValidPhoneNumber(string: textField.text!) {
+            case true:
+                textField.layer.borderColor = UIColor.green.cgColor
+            default:
+                textField.layer.borderColor = UIColor.red.cgColor
+            }
+        }
         guard
         let firstName = firstNameTextField.text, !firstName.isEmpty,
         let lastName = lastNameTextField.text, !lastName.isEmpty,
@@ -131,31 +149,28 @@ extension DetailContactViewController:UITextFieldDelegate {
         guard textField == phoneTextField else {
                 return true
         }
-        textField.layer.borderColor = UIColor.red.cgColor
-        textField.layer.borderWidth = 1
-        guard let lastChar = textField.text?.last else {
-            return string.range(of: "+") != nil
-        }
-        if Contact.isValidPhoneNumber(string: !string.isEmpty ? (textField.text! + string) : String((textField.text?.dropLast())!)) {
-            textField.layer.borderColor = UIColor.green.cgColor
-        }
         guard !string.isEmpty else {return true}
-        var allowedCharacters = CharacterSet.decimalDigits
-        switch lastChar {
-        case "+":
-            return string.rangeOfCharacter(from: allowedCharacters) != nil
-        case " ":
-            return string.rangeOfCharacter(from: allowedCharacters) != nil
-        default:
-            if (textField.text?.components(separatedBy: " ").count)! < 3 {
-                allowedCharacters.insert(charactersIn: " ")
+        if let text = textField.text, let textRange = Range(range, in: text) {
+            guard let lastChar = text[text.startIndex..<textRange.lowerBound].last else {
+                return string == "+"
+            }
+            var allowedCharacters = CharacterSet.decimalDigits
+            switch lastChar {
+            case "+":
                 return string.rangeOfCharacter(from: allowedCharacters) != nil
-            } else {
+            case " ":
                 return string.rangeOfCharacter(from: allowedCharacters) != nil
+            default:
+                if (textField.text?.components(separatedBy: " ").count)! < 3 {
+                    allowedCharacters.insert(charactersIn: " ")
+                    return string.rangeOfCharacter(from: allowedCharacters) != nil
+                } else {
+                    return string.rangeOfCharacter(from: allowedCharacters) != nil
+                }
             }
         }
+        return false
     }
-    
 }
 
 //MARK: - ContactPickerDelegate Methods
@@ -168,8 +183,10 @@ extension DetailContactViewController:CNContactPickerDelegate {
         self.firstNameTextField.text = firstName
         self.lastNameTextField.text = lastName
         var allowedCharacters = CharacterSet.decimalDigits
-        allowedCharacters.insert(charactersIn: " +")
-        let filteredPhone = String(phone.unicodeScalars.filter { allowedCharacters.contains($0)})
+        allowedCharacters.insert(charactersIn: "+")
+        allowedCharacters.insert(Unicode.Scalar(160))
+        allowedCharacters.insert(Unicode.Scalar(32))
+        let filteredPhone = String(phone.unicodeScalars.filter { allowedCharacters.contains($0) })
         if filteredPhone.contains("+") {
             self.phoneTextField.text = filteredPhone
         } else {
