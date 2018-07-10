@@ -9,6 +9,8 @@
 import CoreData
 import Foundation
 
+//Singleton to manage the CoreData stack, load contacts and save them
+
 class CoreDataManager {
     
     static let sharedManager = CoreDataManager()

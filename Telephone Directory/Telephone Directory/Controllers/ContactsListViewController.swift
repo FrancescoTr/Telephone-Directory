@@ -14,7 +14,6 @@ class ContactsListViewController: UIViewController {
     @IBOutlet weak var contactsTableView:
     UITableView!
     
-    
     var contacts = [Contact]()
     var filteredContacts: [Contact]!
     
@@ -89,5 +88,6 @@ extension ContactsListViewController: UISearchBarDelegate {
         searchBar.showsCancelButton = false
         searchBar.text = ""
         searchBar.resignFirstResponder()
+        refreshData()
     }
 }

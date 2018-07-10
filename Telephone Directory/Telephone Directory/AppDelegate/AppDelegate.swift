@@ -15,14 +15,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
+      //Start the app with one contact in the phone directory
+        
         do {
             let contacts = try CoreDataManager.sharedManager.loadContacts()
             if contacts.count == 0 {
                 CoreDataManager.sharedManager.saveContact(firstName: "Francesco", lastName: "Trusiano", phoneNumber: "+39 340 3815515")
             }
         } catch let error as NSError {
-            error.alert(controller: (self.window?.rootViewController)!)
+            error.alert(controller: nil)
         }
         return true
     }

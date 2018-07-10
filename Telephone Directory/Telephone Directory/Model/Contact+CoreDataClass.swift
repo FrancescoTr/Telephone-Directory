@@ -12,6 +12,7 @@ import CoreData
 
 
 public class Contact: NSManagedObject {
+    
     convenience init(firstName: String, lastName:String, phoneNumber:String, context: NSManagedObjectContext) {
         let entity = Contact.entity()
         self.init(entity: entity, insertInto: context)
@@ -27,6 +28,7 @@ public class Contact: NSManagedObject {
         CoreDataManager.sharedManager.saveContext()
     }
     
+    //Check if the string is a valid phone number in the format specified by the pattern variable
     static func isValidPhoneNumber(string: String) -> Bool {
         let pattern = "^[+][0-9]+[\\s][0-9]+[\\s][0-9]{6,}$"
         var status = false
